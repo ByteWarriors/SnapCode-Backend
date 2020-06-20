@@ -112,6 +112,8 @@ def upload():
                     OCRtext += item['Text'] + '\n'
 
             return jsonify({'OCRtext': OCRtext})
+    else:
+        return jsonify({'message':"Send a POST request"})
 
 
 if __name__ == '__main__':
