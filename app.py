@@ -95,6 +95,9 @@ def upload():
             with open(f'./images/{filename}','rb') as file:
                 s3client.upload_fileobj(file,'snapcode-data',filename)
             
+            if os.path.exists(f"./images/{filename}"):
+                os.remove(f'./images/{filename}')
+            
             response = textractClient.detect_document_text(
                 Document = {
                     'S3Object': {
