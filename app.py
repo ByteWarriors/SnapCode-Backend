@@ -19,7 +19,7 @@ textractClient = boto3.client(
 )
 
 
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request, make_response
 import requests
 
 app = Flask(__name__)
@@ -115,7 +115,10 @@ def upload():
                 if 'Text' in item.keys() and item['BlockType'] == 'LINE':
                     OCRtext += item['Text'] + '\n'
 
-            return jsonify({'OCRtext': OCRtext})
+            res = make_response({'OCRtext': OCRtext},status_code=200)
+            res.headers['Access-Control-Allow-Origin'] = "*"
+
+            return res
     else:
         return jsonify({'message':"Send a POST request"})
 
