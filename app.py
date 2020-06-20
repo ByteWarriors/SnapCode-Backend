@@ -115,7 +115,7 @@ def upload():
                 if 'Text' in item.keys() and item['BlockType'] == 'LINE':
                     OCRtext += item['Text'] + '\n'
 
-            res = make_response({'OCRtext': OCRtext},status_code=200)
+            res = make_response({'OCRtext': OCRtext})
             res.headers['Access-Control-Allow-Origin'] = "*"
 
             return res
