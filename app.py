@@ -81,6 +81,7 @@ def runEndpoint():
 def upload():
     if request.method == 'POST':
         if request.files:
+            print("IMAGE RECEIVED")
             image = request.files["image"]
             
             if (allowed_image(image.filename)):
