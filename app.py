@@ -62,6 +62,7 @@ def allowed_image(filename):
 @app.route('/run-code', methods = ['GET','POST'])
 def runEndpoint():
     if request.method == 'POST':
+        statusCode = 200
         source = request.json['source']
         lang = request.json['lang']
         resp = runCode(source,lang)
@@ -69,13 +70,14 @@ def runEndpoint():
         send_res['compile_status'] = resp['compile_status']
         if 'output' not in resp['run_status'].keys():
             send_res['output'] = None
+            statusCode = 406
         else:
             send_res['output'] = resp['run_status']['output']
         send_res['status'] = resp['run_status']['status']
         send_res['status_detail'] = resp['run_status']['status_detail']
-        return jsonify(send_res)
+        return jsonify(send_res), statusCode
     else:
-        return jsonify({'message': "Send a POST request"})
+        return jsonify({'message': "Send a POST request"}),400
 
 @app.route('/upload-image',methods = ['GET','POST'])
 def upload():
