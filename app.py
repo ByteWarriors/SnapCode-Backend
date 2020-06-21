@@ -75,7 +75,7 @@ def runEndpoint():
             send_res['output'] = resp['run_status']['output']
         send_res['status'] = resp['run_status']['status']
         send_res['status_detail'] = resp['run_status']['status_detail']
-        res = make_response(send_res,statusCode)
+        res = make_response(jsonify(send_res),statusCode)
         res.headers['Access-Control-Allow-Origin'] = "*"
         return res
     else:
