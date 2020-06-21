@@ -20,9 +20,12 @@ textractClient = boto3.client(
 
 
 from flask import Flask,jsonify,request, make_response
+
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["IMAGE_UPLOADS"] = "./images"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
@@ -75,6 +78,7 @@ def runEndpoint():
             send_res['output'] = resp['run_status']['output']
         send_res['status'] = resp['run_status']['status']
         send_res['status_detail'] = resp['run_status']['status_detail']
+        print(send_res)
         res = make_response(jsonify(send_res),statusCode)
         res.headers['Access-Control-Allow-Origin'] = "*"
         return res
