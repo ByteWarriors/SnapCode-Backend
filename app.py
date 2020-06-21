@@ -70,7 +70,7 @@ def runEndpoint():
         send_res['compile_status'] = resp['compile_status']
         if 'output' not in resp['run_status'].keys():
             send_res['output'] = None
-            statusCode = 205
+            statusCode = 201
         else:
             send_res['output'] = resp['run_status']['output']
         send_res['status'] = resp['run_status']['status']
